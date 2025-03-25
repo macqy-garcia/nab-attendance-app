@@ -16,9 +16,16 @@ import { DatePickerWithRange } from './date-picker-with-range';
 import { Switch } from '@/components/ui/switch';
 import { PlusCircle, Save, Trash2 } from 'lucide-react';
 
+interface ScheduleItem {
+	id: number;
+	isRestDay: boolean;
+	timeStart: string;
+	timeEnd: string;
+}
+
 export function EmployeeScheduleForm() {
 	const [selectedEmployee, setSelectedEmployee] = React.useState('');
-	const [schedules, setSchedules] = React.useState([
+	const [schedules, setSchedules] = React.useState<ScheduleItem[]>([
 		{ id: 1, isRestDay: false, timeStart: '09:00', timeEnd: '17:00' },
 	]);
 
@@ -38,11 +45,11 @@ export function EmployeeScheduleForm() {
 		]);
 	};
 
-	const removeScheduleRow = (id) => {
+	const removeScheduleRow = (id: number) => {
 		setSchedules(schedules.filter((schedule) => schedule.id !== id));
 	};
 
-	const updateSchedule = (id, field, value) => {
+	const updateSchedule = <T,>(id: number, field: string, value: T) => {
 		setSchedules(
 			schedules.map((schedule) =>
 				schedule.id === id ? { ...schedule, [field]: value } : schedule,
@@ -50,7 +57,7 @@ export function EmployeeScheduleForm() {
 		);
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		// Here you would save the schedules to your database
 		console.log('Employee:', selectedEmployee);

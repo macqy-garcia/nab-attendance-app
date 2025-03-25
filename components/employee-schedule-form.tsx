@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/select';
 import { DatePickerWithRange } from './date-picker-with-range';
 import { Switch } from '@/components/ui/switch';
+import { PlusCircle, Save, Trash2 } from 'lucide-react';
 
 export function EmployeeScheduleForm() {
 	const [selectedEmployee, setSelectedEmployee] = React.useState('');
